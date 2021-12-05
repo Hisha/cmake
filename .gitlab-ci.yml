@@ -12,8 +12,7 @@ build:
   image: busybox:latest
   script:
     - echo 'creating release'
-    - zip -version
-    - zip -r ${WINDOWS_STORMLIB_X64}.zip ${CI_BUILDS_DIR}/stormlib
+    - tar cf ${WINDOWS_STORMLIB_X64}.tar ${CI_BUILDS_DIR}/stormlib
   artifacts:
     paths:
       - ${WINDOWS_STORMLIB_X64}.zip
