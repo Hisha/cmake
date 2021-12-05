@@ -23,7 +23,7 @@ upload:
   image: curlimages/curl:latest
   script:
     - |
-      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file stormlib/ "${PACKAGE_REGISTRY_URL}/${WINDOWS_STORMLIB_X64}"
+      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ${WINDOWS_STORMLIB_X64}.zip "${PACKAGE_REGISTRY_URL}/${WINDOWS_STORMLIB_X64}"
 
 release:
   # Caution, as of 2021-02-02 these assets links require a login, see:
