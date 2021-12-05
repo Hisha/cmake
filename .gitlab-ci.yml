@@ -18,6 +18,9 @@ stormLibRelease:
   #  - mkdir -p stormLibReleaseX64/lib
   #  - cp -R stormlib/includes stormLibReleaseX64/includes
   #  - cp -R stormlib/lib/
+  artifacts:
+    paths: 
+      - stormlib
   release:
     name: 'StormLib Dependency $CI_COMMIT_TAG'
     description: 'Precompiled StormLib Libaray ready for use in windows platform applications.'
