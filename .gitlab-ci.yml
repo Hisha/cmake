@@ -4,12 +4,7 @@ stages:
   - release
 
 variables:
-  # Package version can only contain numbers (0-9), and dots (.).
-  # Must be in the format of X.Y.Z, i.e. should match /\A\d+\.\d+\.\d+\z/ regular expresion.
-  # See https://docs.gitlab.com/ee/user/packages/generic_packages/#publish-a-package-file
-  #PACKAGE_VERSION: "1.2.3"
-  DARWIN_AMD64_BINARY: "windows-stormlib-x64-latest"
-  #LINUX_AMD64_BINARY: "myawesomerelease-linux-amd64-${PACKAGE_VERSION}"
+  WINDOWS_STORMLIB_X64: "windows-stormlib-x64-latest"
   PACKAGE_REGISTRY_URL: "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/stormlib/latest"
 
 build:
@@ -17,17 +12,16 @@ build:
   image: busybox:latest
   script:
      - echo 'creating release'
+     - zip -r ${WINDOWS_STORMLIB_X64}.zip stormlib
   artifacts:
     paths:
-      - stormlib/
-
+      - ${WINDOWS_STORMLIB_X64}.zip
 upload:
   stage: upload
   image: curlimages/curl:latest
   script:
     - |
-      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file stormlib/ "${PACKAGE_REGISTRY_URL}/${DARWIN_AMD64_BINARY}"
-      #curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file stormlib/ "${PACKAGE_REGISTRY_URL}/${DARWIN_AMD64_BINARY}"
+      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file stormlib/ "${PACKAGE_REGISTRY_URL}/${WINDOWS_STORMLIB_X64}"
 
 release:
   # Caution, as of 2021-02-02 these assets links require a login, see:
@@ -37,4 +31,4 @@ release:
   script:
     - |
       release-cli create --name "Release latest" --tag-name latest \
-        --assets-link "{\"name\":\"${DARWIN_AMD64_BINARY}\",\"url\":\"${PACKAGE_REGISTRY_URL}/${DARWIN_AMD64_BINARY}\"}" 
+        --assets-link "{\"name\":\"${DARWIN_AMD64_BINARY}\",\"url\":\"${PACKAGE_REGISTRY_URL}/${WINDOWS_STORMLIB_X64}\"}" 
