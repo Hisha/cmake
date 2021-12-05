@@ -12,6 +12,7 @@ build:
   image: archlinux:latest
   script:
     - echo 'creating release'
+    - pacman zip
     - zip -r ${WINDOWS_STORMLIB_X64}.zip stormlib
   artifacts:
     paths:
