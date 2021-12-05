@@ -25,4 +25,4 @@ stormLibRelease:
     assets:
       links:
         - name: 'StormLib'
-          filepath: ''
+          filepath: 'stormlib'
