@@ -10,7 +10,7 @@
 image: busybox:latest
 
 stormLibRelease:
-  stage: release
+  stage: build
   script:
     - echo 'creating release'
   #  - cd $CI_BUILDS_DIR
