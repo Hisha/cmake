@@ -9,10 +9,10 @@ variables:
 
 build:
   stage: build
-  image: busybox:latest
+  image: archlinux:latest
   script:
     - echo 'creating release'
-    - tar cf ${WINDOWS_STORMLIB_X64}.tar ${CI_BUILDS_DIR}/stormlib
+    - zip -r ${WINDOWS_STORMLIB_X64}.zip stormlib
   artifacts:
     paths:
       - ${WINDOWS_STORMLIB_X64}.zip
