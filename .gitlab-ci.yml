@@ -11,9 +11,9 @@ build:
   stage: build
   image: busybox:latest
   script:
-    - apt install zip unzip
     - echo 'creating release'
-    - zip -r ${WINDOWS_STORMLIB_X64}.zip stormlib
+    - zip -version
+    - zip -r ${WINDOWS_STORMLIB_X64}.zip ${CI_BUILDS_DIR}/stormlib
   artifacts:
     paths:
       - ${WINDOWS_STORMLIB_X64}.zip
