@@ -31,6 +31,9 @@ upload:
     #  curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ${WINDOWS_STORMLIB_X64}.zip "${PACKAGE_REGISTRY_URL}/${WINDOWS_STORMLIB_X64}.zip"
     #  curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/releases/latest"
 
+
+
+    
 release:
   # Caution, as of 2021-02-02 these assets links require a login, see:
   # https://gitlab.com/gitlab-org/gitlab/-/issues/299384

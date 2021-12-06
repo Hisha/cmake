@@ -18,7 +18,7 @@ print ('projId', str(projectId))
 artifactName =  arguments[3];
 print ('name', str(artifactName))
 
-
+print(f'rul : {APIurl}/projects/{projectId}/packages')
 #Get acsess token
 #Get all packages
 my_headers = {'JOB-TOKEN' : f'{APItoken}'}
