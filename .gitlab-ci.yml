@@ -20,17 +20,15 @@ build:
       - ${WINDOWS_STORMLIB_X64}.zip
 upload:
   stage: upload
-  image: havric/dependencycli:latest
+  image: python:latest
   script:
-    - info
-    - exit
-   # - |
-   #   'PROJECT_ID' = "$"
-   #   curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" "${PACKAGE_REGISTRY_URL}/projects/${CI_PROJECT_ID}/packages"
-
-   #  curl --request DELETE --header "JOB-TOKEN: ${CI_JOB_TOKEN}" "${PACKAGE_REGISTRY_URL}/projects/${CI_PROJECT_ID}/packages/:package_id"
-   #   curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ${WINDOWS_STORMLIB_X64}.zip "${PACKAGE_REGISTRY_URL}/${WINDOWS_STORMLIB_X64}.zip"
-   #   curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/releases/latest"
+    - python upload.py
+    #- |
+   #  'PROJECT_ID' = "$"
+    #  curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" "${PACKAGE_REGISTRY_URL}/projects/${CI_PROJECT_ID}/packages"
+    #  curl --request DELETE --header "JOB-TOKEN: ${CI_JOB_TOKEN}" "${PACKAGE_REGISTRY_URL}/projects/${CI_PROJECT_ID}/packages/:package_id"
+    #  curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ${WINDOWS_STORMLIB_X64}.zip "${PACKAGE_REGISTRY_URL}/${WINDOWS_STORMLIB_X64}.zip"
+    #  curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/releases/latest"
 
 release:
   # Caution, as of 2021-02-02 these assets links require a login, see:
