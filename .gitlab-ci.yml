@@ -22,7 +22,8 @@ upload:
   stage: upload
   image: python:latest
   script:
-    - python upload.py
+    - pip3 install requests
+    - python upload-package.py
     #- |
    #  'PROJECT_ID' = "$"
     #  curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" "${PACKAGE_REGISTRY_URL}/projects/${CI_PROJECT_ID}/packages"
