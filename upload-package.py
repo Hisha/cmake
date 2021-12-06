@@ -21,7 +21,7 @@ print ('name', str(artifactName))
 
 #Get acsess token
 #Get all packages
-my_headers = {'PRIVATE-TOKEN' : f'{APItoken}'}
+my_headers = {'PRIVATE-TOKEN' : 'nBU1UCHC8oDu3mhtDcMm'}
 response = requests.get(f"{APIurl}/projects/{projectId}/packages", headers=my_headers )     # To execute get request 
 
 print(response.json())
