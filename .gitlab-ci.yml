@@ -23,9 +23,9 @@ upload:
   image: python:latest
   script:
     - pip3 install requests
-    - python upload-package.py
+    - python upload-package.py ${CI_API_V4_URL} ${CI_JOB_TOKEN} ${CI_PROJECT_ID} ${WINDOWS_STORMLIB_X64}
     #- |
-   #  'PROJECT_ID' = "$"
+    #  'PROJECT_ID' = "$"
     #  curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" "${PACKAGE_REGISTRY_URL}/projects/${CI_PROJECT_ID}/packages"
     #  curl --request DELETE --header "JOB-TOKEN: ${CI_JOB_TOKEN}" "${PACKAGE_REGISTRY_URL}/projects/${CI_PROJECT_ID}/packages/:package_id"
     #  curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ${WINDOWS_STORMLIB_X64}.zip "${PACKAGE_REGISTRY_URL}/${WINDOWS_STORMLIB_X64}.zip"
