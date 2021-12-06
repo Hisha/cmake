@@ -17,6 +17,9 @@ projectId =  arguments[2];
 print ('projId', str(projectId))
 artifactName =  arguments[3];
 print ('name', str(artifactName))
+
+
 #Get acsess token
 #Get all packages
-#response = requests.get("www.dummyurl.com")     # To execute get request 
+my_headers = {'PRIVATE-TOKEN' : f'{APItoken}'}
+response = requests.get(f"{APIurl}/projects/{projectId}/packages", headers=my_headers )     # To execute get request 
