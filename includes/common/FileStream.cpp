@@ -614,17 +614,22 @@ static void BaseMap_Init(TFileStream * pStream)
 static DWORD BaseHttp_ParseURL(TFileStream * pStream, LPCTSTR szFileName)
 {
     LPCTSTR szFilePtr = szFileName;
+    LPCTSTR szPortPtr = szFileName;
     char * hostName;
     char * fileName;
 
-    // Find the end od the host name
+    // Find the end of the host name
     if((szFilePtr = _tcschr(szFileName, '/')) == NULL)
         return ERROR_INVALID_PARAMETER;
 
+    // Find the end of the potential port
+    if ((szPortPtr = _tcschr(szFileName, ':')) == NULL)
+        szPortPtr = szFilePtr;
+
     // Allocate and copy the host name
-    if((hostName = CASC_ALLOC<char>(szFilePtr - szFileName + 1)) != NULL)
+    if((hostName = CASC_ALLOC<char>(szPortPtr - szFileName + 1)) != NULL)
     {
-        CascStrCopy(hostName, 256, szFileName, (szFilePtr - szFileName));
+        CascStrCopy(hostName, 256, szFileName, (szPortPtr - szFileName));
 
         // Allocate and copy the resource name
         if((fileName = CascNewStrT2A(szFilePtr)) != NULL)
@@ -661,8 +666,11 @@ static DWORD BaseHttp_ParsePort(TFileStream* pStream, LPCTSTR szFileName, int& p
     {
         CascStrCopy(foundPort, 256, szPortPtr + 1, (szFilePtr - szPortPtr));
         port = atoi(foundPort);
-        CASC_FREE(foundPort);
+
+        return ERROR_SUCCESS;
     }
+
+    CASC_FREE(foundPort);
 
     return ERROR_NOT_ENOUGH_MEMORY;
 }
