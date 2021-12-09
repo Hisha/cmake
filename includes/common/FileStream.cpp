@@ -659,7 +659,7 @@ static DWORD BaseHttp_ParsePort(TFileStream* pStream, LPCTSTR szFileName, int& p
     // Allocate and copy the host name
     if ((foundPort = CASC_ALLOC<char>((szFilePtr + 1) - szPortPtr )) != NULL)
     {
-        CascStrCopy(foundPort, 256, szPortPtr, (szFilePtr - szPortPtr));
+        CascStrCopy(foundPort, 256, szPortPtr + 1, (szFilePtr - szPortPtr));
         port = atoi(foundPort);
         CASC_FREE(foundPort);
     }
