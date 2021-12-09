@@ -6,7 +6,6 @@ FUNCTION(collect_files output base_dir do_recurse globbing_exprs exclude_dirs)
                 SET(glob GLOB)
         ENDIF()
 
-        SET(base_dir "${CMAKE_SOURCE_DIR}/${base_dir}")
         LIST(TRANSFORM globbing_exprs PREPEND "${base_dir}/")
         FILE(${glob} files CONFIGURE_DEPENDS ${globbing_exprs})
 
@@ -26,6 +25,7 @@ FUNCTION(collect_files output base_dir do_recurse globbing_exprs exclude_dirs)
         ENDFOREACH()
         SET(${output} "${result}" PARENT_SCOPE)
 ENDFUNCTION()
+
 
 FUNCTION(contains_filter output files regex)
 
