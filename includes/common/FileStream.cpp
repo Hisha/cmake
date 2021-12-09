@@ -643,7 +643,7 @@ static DWORD BaseHttp_ParseURL(TFileStream * pStream, LPCTSTR szFileName)
 static bool BaseHttp_Download(TFileStream * pStream)
 {
     CASC_MIME Mime;
-    const char * request_mask = "GET %s HTTP/1.1\r\nHost: %s\r\nConnection: Keep-Alive\r\n\r\n";
+    const char * request_mask = "GET %s%s HTTP/1.1\r\nHost: %s\r\nConnection: Keep-Alive\r\n\r\n";
     char * server_response;
     char * fileName = pStream->Base.Socket.fileName;
     char request[0x100];
@@ -664,7 +664,7 @@ static bool BaseHttp_Download(TFileStream * pStream)
         }
 
         // Send the request and receive decoded response
-        request_length = CascStrPrintf(request, _countof(request), request_mask, fileName, pStream->Base.Socket.hostName);
+        request_length = CascStrPrintf(request, _countof(request), request_mask, pStream->Base.Socket.hostName, fileName, fileName);
         server_response = pStream->Base.Socket.pSocket->ReadResponse(request, request_length, &response_length);
         if(server_response != NULL)
         {
