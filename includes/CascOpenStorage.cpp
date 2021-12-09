@@ -62,6 +62,7 @@ TCascStorage::TCascStorage()
     dwRefCount = 1;
 
     szRootPath = szDataPath = szIndexPath = szBuildFile = szCdnServers = szCdnPath = szCodeName = NULL;
+    szCdnHostUrl = NULL;
     szIndexFormat = NULL;
     szRegion = NULL;
     szBuildKey = NULL;
