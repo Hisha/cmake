@@ -640,6 +640,33 @@ static DWORD BaseHttp_ParseURL(TFileStream * pStream, LPCTSTR szFileName)
     return ERROR_NOT_ENOUGH_MEMORY;
 }
 
+//-----------------------------------------------------------------------------
+// Local functions - base HTTP file support
+
+static DWORD BaseHttp_ParsePort(TFileStream* pStream, LPCTSTR szFileName, int& port)
+{
+    LPCTSTR szFilePtr = szFileName;
+    LPCTSTR szPortPtr = szFileName;
+    char* foundPort;
+
+    // Find the end of the potential port
+    if ((szPortPtr = _tcschr(szFileName, ':')) == NULL)
+        return ERROR_INVALID_PARAMETER;
+    // Find the end of the host name
+    if ((szFilePtr = _tcschr(szFileName, '/')) == NULL)
+        return ERROR_INVALID_PARAMETER;
+
+    // Allocate and copy the host name
+    if ((foundPort = CASC_ALLOC<char>(szPortPtr - szFilePtr + 1)) != NULL)
+    {
+        CascStrCopy(foundPort, 256, szPortPtr, (szPortPtr - szFilePtr));
+        port = atoi(foundPort);
+        CASC_FREE(foundPort);
+    }
+
+    return ERROR_NOT_ENOUGH_MEMORY;
+}
+
 static bool BaseHttp_Download(TFileStream * pStream)
 {
     CASC_MIME Mime;
@@ -686,13 +713,16 @@ static bool BaseHttp_Download(TFileStream * pStream)
 static bool BaseHttp_Open(TFileStream * pStream, LPCTSTR szFileName, DWORD dwStreamFlags)
 {
     DWORD dwErrCode;
-
     // Extract the server part
     if((dwErrCode = BaseHttp_ParseURL(pStream, szFileName)) == ERROR_SUCCESS)
     {
         // Determine the proper port
         PCASC_SOCKET pSocket;
-        int portNum = ((dwStreamFlags & BASE_PROVIDER_MASK) == BASE_PROVIDER_RIBBIT) ? CASC_PORT_RIBBIT : CASC_PORT_HTTP;
+        int portNum;
+        if ((dwErrCode = BaseHttp_ParsePort(pStream, szFileName, portNum)) != ERROR_SUCCESS)
+        {
+            portNum = ((dwStreamFlags & BASE_PROVIDER_MASK) == BASE_PROVIDER_RIBBIT) ? CASC_PORT_RIBBIT : CASC_PORT_HTTP;
+        }
 
         // Initiate the remote connection
         if((pSocket = sockets_connect(pStream->Base.Socket.hostName, portNum)) != NULL)

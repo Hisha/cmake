@@ -34,7 +34,7 @@
 #define EPIPE               32
 #endif
 
-#define CASC_PORT_HTTP      8000
+#define CASC_PORT_HTTP      80
 #define CASC_PORT_RIBBIT    1119
 
 //-----------------------------------------------------------------------------
