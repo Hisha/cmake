@@ -1,0 +1,7 @@
+bin
+.vscode/settings.json
+thirdparty/*
+build/
+.idea/
+cmake-build-debug
+cmake-build-release
