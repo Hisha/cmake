@@ -18,9 +18,9 @@ endif()
 
 find_path (CASCLIB_INCLUDE_DIR CascLib.h CascPort.h)
 
-find_library (_casc_debug_lib NAMES CascLibDAD CascLibDAS CascLibDUD CascLibDUS PATHS ${CASCLIB_LIBRARY_DEBUG_DIR})
-find_library (_casc_release_lib NAMES CascLibRAD CascLibRAS CascLibRUD CascLibRUS PATHS ${CASCLIB_LIBRARY_RELEASE_DIR})
-find_library (_casc_any_lib NAMES Casc Casclib CascLib)
+find_library (_casc_debug_lib NAMES CascLibDAD CascLibDAS CascLibDUD CascLibDUS casc casclib CascLib PATHS ${CASCLIB_LIBRARY_DEBUG_DIR})
+find_library (_casc_release_lib NAMES CascLibRAD CascLibRAS CascLibRUD CascLibRUS  casc casclib CascLibPATHS ${CASCLIB_LIBRARY_RELEASE_DIR})
+find_library (_casc_any_lib NAMES casc casclib CascLib)
 
 set (CASC_LIBRARIES)
 if (_casc_debug_lib AND _casc_release_lib)
