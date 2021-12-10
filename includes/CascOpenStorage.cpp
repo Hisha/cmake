@@ -1165,11 +1165,11 @@ static DWORD LoadCascStorage(TCascStorage * hs, PCASC_OPEN_STORAGE_ARGS pArgs)
     // Extract optional arguments
     ExtractVersionedArgument(pArgs, FIELD_OFFSET(CASC_OPEN_STORAGE_ARGS, dwLocaleMask), &dwLocaleMask);
 
-    // Extract the product code name
+    // Extract the Cdn Hosr Url
     if (ExtractVersionedArgument(pArgs, FIELD_OFFSET(CASC_OPEN_STORAGE_ARGS, szCdnHostUrl), &szCdnHostUrl) && szCdnHostUrl != NULL)
         hs->szCdnHostUrl = CascNewStr(szCdnHostUrl);
 
-    // Extract the product code name
+    // Extract the Cdn Hosr Region
     if (ExtractVersionedArgument(pArgs, FIELD_OFFSET(CASC_OPEN_STORAGE_ARGS, szCdnHostRegion), &szCdnHostRegion) && szCdnHostRegion != NULL)
         hs->szCdnHostRegion = CascNewStr(szCdnHostRegion);
     
@@ -1300,8 +1300,8 @@ static LPTSTR ParseOpenParams(LPCTSTR szParams, PCASC_OPEN_STORAGE_ARGS pArgs)
         return NULL;
     }
 
-    // The 'pArgs' must be valid but must not contain 'szLocalPath', 'szCodeName' or 'szRegion'
-    if(pArgs->szCdnHostUrl != NULL || pArgs->szLocalPath != NULL || pArgs->szCodeName != NULL || pArgs->szRegion != NULL)
+    // The 'pArgs' must be valid but must not contain 'szCdnHostRegion', 'szCdnHostUrl','szLocalPath', 'szCodeName' or 'szRegion'
+    if(pArgs->szCdnHostRegion != NULL || pArgs->szCdnHostUrl != NULL || pArgs->szLocalPath != NULL || pArgs->szCodeName != NULL || pArgs->szRegion != NULL)
     {
         SetCascError(ERROR_INVALID_PARAMETER);
         return NULL;
