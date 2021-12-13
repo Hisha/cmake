@@ -1,0 +1,28 @@
+# This file is part of Noggit3, licensed under GNU General Public License (version 3).
+
+# Dependency: lua
+FetchContent_Declare(
+    lua
+  GIT_REPOSITORY https://gitlab.com/prophecy-rp/dependencies.git
+  GIT_TAG        dep-lua
+)
+
+FetchContent_GetProperties(lua)
+IF(NOT lodepng_POPULATED)
+  MESSAGE(STATUS "Installing lodepng...")
+  FetchContent_Populate (lodepng)
+  SET(LUA_INCLUDE_DIR "${lua_SOURCE_DIR}/includes")
+  SET(LUA_LIBRARY_DEBUG_DIR "${lua_SOURCE_DIR}/lib/debug/x64")
+  SET(LUA_LIBRARY_RELEASE_DIR "${lua_SOURCE_DIR}/lib/release/x64")
+ENDIF()
+
+find_library(_lua_debug_lib NAMES Lua PATHS ${LUA_LIBRARY_DEBUG_DIR})
+find_library(_lua_release_lib NAMES Lua PATHS ${LUA_LIBRARY_RELEASE_DIR})
+
+set (LUA_LIBRARIES)
+list (APPEND LUA_LIBRARIES debug ${_lua_debug_lib} optimized ${_lua_release_lib})
+
+ADD_LIBRARY(Lua-Lua INTERFACE)
+ADD_LIBRARY(Lua::Lua ALIAS Lua-Lua)
+TARGET_LINK_LIBRARIES(Lua-Lua INTERFACE ${CASC_LIBRARIES})
+TARGET_INCLUDE_DIRECTORIES(Lua-Lua INTERFACE ${LUA_INCLUDE_DIR})
