@@ -9,6 +9,7 @@ FetchContent_Declare(
 
 FetchContent_GetProperties(casclib)
 if(NOT casclib)
+  MESSAGE(STATUS "---------------------------------------------")
   MESSAGE(STATUS "Installing Casclib...")
   FetchContent_Populate(casclib)
   SET(CASCLIB_INCLUDE_DIR "${casclib_SOURCE_DIR}/includes")
@@ -42,3 +43,9 @@ set_property  (TARGET CascLib APPEND PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${CA
 #remove_definitions(-D_DLL)
 #! \note on Windows, Casc tries to auto-link. There is no proper flag to disable that, so abuse this one.
 target_compile_definitions (CascLib INTERFACE -DCASCLIB_NO_AUTO_LINK_LIBRARY)
+
+MESSAGE(STATUS "Casclib Include : ${CASCLIB_INCLUDE_DIR}")
+MESSAGE(STATUS "Casclib Debug Lib : ${_casc_debug_lib} ")
+MESSAGE(STATUS "Casclib Optimized Lib : ${_casc_release_lib} ")
+MESSAGE(STATUS "Casclib Installed!")
+MESSAGE(STATUS "---------------------------------------------")

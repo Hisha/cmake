@@ -9,6 +9,7 @@ FetchContent_Declare(
 
 FetchContent_GetProperties(stormlib)
 if(NOT stormlib_POPULATED)
+  MESSAGE(STATUS "---------------------------------------------")
   MESSAGE(STATUS "Installing Stormlib...")
   FetchContent_Populate(stormlib)
   SET(STORM_INCLUDE_DIR "${stormlib_SOURCE_DIR}/includes")
@@ -41,3 +42,9 @@ set_property  (TARGET StormLib APPEND PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${S
 
 #! \note on Windows, storm tries to auto-link. There is no proper flag to disable that, so abuse this one.
 target_compile_definitions (StormLib INTERFACE -D__STORMLIB_SELF__)
+
+MESSAGE(STATUS "Stormlib Include : ${STORM_INCLUDE_DIR}")
+MESSAGE(STATUS "Stormlib Debug Lib : ${_storm_debug_lib} ")
+MESSAGE(STATUS "Stormlib Optimized Lib : ${_storm_release_lib} ")
+MESSAGE(STATUS "Stormlib Installed!")
+MESSAGE(STATUS "---------------------------------------------")

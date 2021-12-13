@@ -8,6 +8,7 @@ FetchContent_Declare(lua
 
 FetchContent_GetProperties(lua)
 IF(NOT lua_POPULATED)
+  MESSAGE(STATUS "---------------------------------------------")
   MESSAGE(STATUS "Installing Lua...")
   FetchContent_Populate (lua)
   SET(LUA_INCLUDE_DIR "${lua_SOURCE_DIR}/includes")
@@ -20,7 +21,14 @@ FIND_LIBRARY(_lua_release_lib NAMES Lua PATHS ${LUA_LIBRARY_RELEASE_DIR})
 
 SET(LUA_LIBRARIES)
 LIST(APPEND LUA_LIBRARIES debug ${_lua_debug_lib} optimized ${_lua_release_lib})
+
 ADD_LIBRARY(Lua-Lua INTERFACE)
 ADD_LIBRARY(Lua::Lua ALIAS Lua-Lua)
 TARGET_LINK_LIBRARIES(Lua-Lua INTERFACE ${LUA_LIBRARIES})
 TARGET_INCLUDE_DIRECTORIES(Lua-Lua INTERFACE ${LUA_INCLUDE_DIR})
+
+MESSAGE(STATUS "Lua Include : ${LUA_INCLUDE_DIR}")
+MESSAGE(STATUS "Lua Debug Lib : ${_lua_debug_lib} ")
+MESSAGE(STATUS "Lua Optimized Lib : ${_lua_release_lib} ")
+MESSAGE(STATUS "Lua Installed!")
+MESSAGE(STATUS "---------------------------------------------")
