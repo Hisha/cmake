@@ -21,7 +21,7 @@ FIND_LIBRARY(_lua_release_lib NAMES Lua54 PATHS ${LUA_LIBRARY_RELEASE_DIR})
 
 SET(LUA_LIBRARY_LIBRARIES)
 IF(_lua_debug_lib AND _lua_release_lib)
-    LIST(APPEND LUA_LIBRARIES debug ${_lua_debug_lib} optimized ${_lua_release_lib})
+    LIST(APPEND LUA_LIBRARY_LIBRARIES debug ${_lua_debug_lib} optimized ${_lua_release_lib})
     ADD_LIBRARY(Lua-Lua INTERFACE)
     ADD_LIBRARY(Lua::Lua ALIAS Lua-Lua)
     TARGET_LINK_LIBRARIES(Lua-Lua INTERFACE ${LUA_LIBRARY_LIBRARIES})
