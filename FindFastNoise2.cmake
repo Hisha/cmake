@@ -9,11 +9,11 @@ FetchContent_Declare (fastnoise2
         )
 FetchContent_GetProperties (fastnoise2)
 IF(NOT fastnoise2_POPULATED)
-  MESSAGE(STATUS "Installing FastNoise2... (big repo, large download)")
+  MESSAGE(STATUS "Installing FastNoise2...")
   FetchContent_Populate (fastnoise2)
 ENDIF()
 
-SET(FASTNOISE2_NOISETOOL OFF)
+SET(FASTNOISE2_NOISETOOL:BOOL OFF)
 SET(FASTNOISE2_TESTS:BOOL OFF)
 
 IF(FASTNOISE2_NOISETOOL)
