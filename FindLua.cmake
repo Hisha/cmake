@@ -9,7 +9,7 @@ FetchContent_Declare(
 
 FetchContent_GetProperties(lua)
 IF(NOT lodepng_POPULATED)
-  MESSAGE(STATUS "Installing lodepng...")
+  MESSAGE(STATUS "Installing Lua...")
   FetchContent_Populate (lua)
   SET(LUA_INCLUDE_DIR "${lua_SOURCE_DIR}/includes")
   SET(LUA_LIBRARY_DEBUG_DIR "${lua_SOURCE_DIR}/lib/debug/x64")
