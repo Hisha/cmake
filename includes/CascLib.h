@@ -143,7 +143,7 @@ extern "C" {
 
 // Macro to convert FileDataId to the argument of CascOpenFile
 #define CASC_FILE_DATA_ID(FileDataId) ((LPCSTR)(size_t)FileDataId)
-#define CASC_FILE_DATA_ID_FROM_STRING(szFileName)  ((DWORD)*((size_t*)szFileName))
+#define CASC_FILE_DATA_ID_FROM_STRING(szFileName)  ((DWORD)(size_t)szFileName)
 
 // Maximum length of encryption key
 #define CASC_KEY_LENGTH 0x10
