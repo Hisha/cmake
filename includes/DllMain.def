@@ -33,9 +33,5 @@ EXPORTS
     CascFindEncryptionKey
     CascGetNotFoundEncryptionKey
 
-    CascCdnGetDefault
-    CascCdnDownload
-    CascCdnFree
-
     GetCascError
     SetCascError
