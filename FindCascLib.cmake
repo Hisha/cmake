@@ -15,7 +15,7 @@ if(NOT casclib)
   SET(CASCLIB_INCLUDE_DIR "${casclib_SOURCE_DIR}/includes")
 
   if (UNIX)
-    if (not APPLE)
+    if (NOT APPLE)
       SET(CASCLIB_LIBRARY_DEBUG_DIR "${casclib_SOURCE_DIR}/lib/debug/x64-linux")
       SET(CASCLIB_LIBRARY_RELEASE_DIR "${casclib_SOURCE_DIR}/lib/release/x64-linux")
     else()
