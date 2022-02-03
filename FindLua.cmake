@@ -269,14 +269,13 @@ ELSE()
 
     mark_as_advanced(LUA_INCLUDE_DIR LUA_LIBRARY)
 
-    cmake_policy(POP)
-
     ADD_LIBRARY(Lua-Lua INTERFACE)
     ADD_LIBRARY(Lua::Lua ALIAS Lua-Lua)
     TARGET_LINK_LIBRARIES(Lua-Lua INTERFACE ${LUA_LIBRARY})
     TARGET_INCLUDE_DIRECTORIES(Lua-Lua INTERFACE ${LUA_INCLUDE_DIR})
 ENDIF()
 
+cmake_policy(POP)
 
 MESSAGE(STATUS "Lua Include         : ${LUA_LIBRARY_INCLUDE_DIR}")
 MESSAGE(STATUS "Lua Debug Lib       : ${_lua_debug_lib}")
