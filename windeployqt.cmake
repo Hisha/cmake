@@ -24,8 +24,13 @@ function(windeployqt target)
                 --no-svg
                 --no-angle
                 --no-opengl-sw
-                --no-compiler-runtime
+                --compiler-runtime
                 --no-system-d3d-compiler
+                --no-quick-import
+                --no-translations
+                --no-virtualkeyboard
+                --no-webkit2
+                --no-qmltooling
                 \"$<TARGET_FILE:${target}>\"
                 COMMENT "Deploying Qt libraries using windeployqt for compilation target '${target}' ..."
                 )
@@ -45,8 +50,13 @@ function(windeployqt target)
                 --no-svg
                 --no-angle
                 --no-opengl-sw
-                --no-compiler-runtime
+                --compiler-runtime
                 --no-system-d3d-compiler
+                --no-quick-import
+                --no-translations
+                --no-virtualkeyboard
+                --no-webkit2
+                --no-qmltooling
                 \"$<TARGET_FILE:${target}>\"
                 COMMENT "Deploying Qt libraries using windeployqt for compilation target '${target}' ..."
                 )
