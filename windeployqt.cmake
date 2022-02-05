@@ -7,12 +7,15 @@ get_filename_component(_qt_bin_dir "${_qmake_executable}" DIRECTORY)
 
 function(windeployqt target)
 
+    if (NOT DEFINED CMAKE_BUILD_TYPE)
+        message("Warning: CMAKE_BUILD_TYPE is not defined. Both Release and Debug libraries will be deployed")
+
     # POST_BUILD step
     # - after build, we have a bin/lib for analyzing qt dependencies
     # - we run windeployqt on target and deploy Qt libs
 
     # debug configuration
-    if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+    if (CMAKE_BUILD_TYPE STREQUAL "Debug" OR NOT DEFINED CMAKE_BUILD_TYPE)
         add_custom_command(TARGET ${target} POST_BUILD
                 COMMAND "${_qt_bin_dir}/windeployqt.exe"
                 --verbose 1
@@ -31,7 +34,9 @@ function(windeployqt target)
     # release configuration
     if (CMAKE_BUILD_TYPE STREQUAL "Release"
         OR CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo"
-        OR CMAKE_BUILD_TYPE STREQUAL "MinSizeRel")
+        OR CMAKE_BUILD_TYPE STREQUAL "MinSizeRel"
+        OR NOT DEFINED CMAKE_BUILD_TYPE)
+
         add_custom_command(TARGET ${target} POST_BUILD
                 COMMAND "${_qt_bin_dir}/windeployqt.exe"
                 --verbose 1
