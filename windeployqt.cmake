@@ -9,6 +9,7 @@ function(windeployqt target)
 
     if (NOT DEFINED CMAKE_BUILD_TYPE)
         message("Warning: CMAKE_BUILD_TYPE is not defined. Both Release and Debug libraries will be deployed")
+    endif()
 
     # POST_BUILD step
     # - after build, we have a bin/lib for analyzing qt dependencies
