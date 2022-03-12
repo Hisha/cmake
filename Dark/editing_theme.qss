@@ -796,7 +796,7 @@ QWidget[accessibleName="main_menu_minimap_holder"]{
 }
 
 QPushButton#gamePathField_browse,
-QPushButton#projectPathField_browse,
+QPushButton#clientPathField_browse,
 QPushButton#importPathField_browse,
 QPushButton#wmvLogPathField_browse{
 	margin-left: 6px;

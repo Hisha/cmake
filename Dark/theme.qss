@@ -825,8 +825,6 @@ QWidget[accessibleName="main_menu_minimap_holder"]{
   background-color: #1f2023;
 }
 
-QPushButton#gamePathField_browse,
-QPushButton#projectPathField_browse,
 QPushButton#importPathField_browse,
 QPushButton#wmvLogPathField_browse{
 	margin-left: 6px;
