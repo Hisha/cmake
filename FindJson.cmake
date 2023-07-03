@@ -8,6 +8,6 @@ FetchContent_Declare (json
 FetchContent_GetProperties (json)
 IF(NOT json_POPULATED)
   MESSAGE(STATUS "Installing json.hpp...")
-  FetchContent_Populate(json)
+  FetchContent_PopulateFast(json)
 ENDIF()
 ADD_SUBDIRECTORY(${json_SOURCE_DIR} ${json_BINARY_DIR} EXCLUDE_FROM_ALL)

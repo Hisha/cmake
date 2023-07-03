@@ -8,7 +8,7 @@ FetchContent_Declare (lodepng
 FetchContent_GetProperties (lodepng)
 IF(NOT lodepng_POPULATED)
   MESSAGE(STATUS "Installing lodepng...")
-  FetchContent_Populate (lodepng)
+  FetchContent_PopulateFast(lodepng)
 ENDIF()
 ADD_LIBRARY(lodepng "${lodepng_SOURCE_DIR}/lodepng.cpp")
 TARGET_INCLUDE_DIRECTORIES(lodepng SYSTEM PUBLIC ${lodepng_SOURCE_DIR})

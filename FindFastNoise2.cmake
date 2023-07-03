@@ -10,7 +10,7 @@ FetchContent_Declare (fastnoise2
 FetchContent_GetProperties (fastnoise2)
 IF(NOT fastnoise2_POPULATED)
   MESSAGE(STATUS "Installing FastNoise2...")
-  FetchContent_Populate (fastnoise2)
+  FetchContent_PopulateFast(fastnoise2)
 ENDIF()
 
 SET(FASTNOISE2_NOISETOOL:BOOL OFF)

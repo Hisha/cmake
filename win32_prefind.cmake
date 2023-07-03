@@ -15,6 +15,3 @@ endif(LIB_ROOT)
 set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} ${FREETYPE_DIR} ${STORMLIB_DIR} ${GLEW_DIR})
 SET(Boost_USE_STATIC_LIBS ON)
 
-if ("cxx_variable_templates" IN_LIST CMAKE_CXX_COMPILE_FEATURES)
-  add_definitions (-D__cpp_variable_templates=201304)
-endif()

@@ -11,7 +11,7 @@ FetchContent_GetProperties(casclib)
 if(NOT casclib)
   MESSAGE(STATUS "---------------------------------------------")
   MESSAGE(STATUS "Installing Casclib...")
-  FetchContent_Populate(casclib)
+  FetchContent_PopulateFast(casclib)
   SET(CASCLIB_INCLUDE_DIR "${casclib_SOURCE_DIR}/includes")
 
   if (UNIX)
