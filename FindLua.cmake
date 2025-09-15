@@ -196,15 +196,17 @@ FetchContent_Declare(lua
         GIT_TAG        dep-lua
         )
 
-FetchContent_GetProperties(lua)
-IF(NOT lua_POPULATED)
+FetchContent_MakeAvailable(lua)
+
+# FetchContent_GetProperties(lua)
+# IF(NOT lua_POPULATED)
     MESSAGE(STATUS "---------------------------------------------")
     MESSAGE(STATUS "Installing Lua...")
-    FetchContent_PopulateFast(lua)
+    # FetchContent_PopulateFast(lua)
     SET(LUA_LIBRARY_INCLUDE_DIR "${lua_SOURCE_DIR}/includes")
     SET(LUA_LIBRARY_DEBUG_DIR "${lua_SOURCE_DIR}/lib/debug/x64")
     SET(LUA_LIBRARY_RELEASE_DIR "${lua_SOURCE_DIR}/lib/release/x64")
-ENDIF()
+# ENDIF()
 
 FIND_LIBRARY(_lua_debug_lib NAMES Lua54 PATHS ${LUA_LIBRARY_DEBUG_DIR})
 FIND_LIBRARY(_lua_release_lib NAMES Lua54 PATHS ${LUA_LIBRARY_RELEASE_DIR})

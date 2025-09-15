@@ -6,16 +6,17 @@ FetchContent_Declare(
   GIT_REPOSITORY https://gitlab.com/prophecy-rp/dependencies.git
   GIT_TAG        dep-stormlib
 )
+FetchContent_MakeAvailable(stormlib) # replaces FetchContent_PopulateFast
 
-FetchContent_GetProperties(stormlib)
-if(NOT stormlib_POPULATED)
+# FetchContent_GetProperties(stormlib)
+# if(NOT stormlib_POPULATED)
   MESSAGE(STATUS "---------------------------------------------")
   MESSAGE(STATUS "Installing Stormlib...")
-  FetchContent_PopulateFast(stormlib)
+#   FetchContent_PopulateFast(stormlib)
   SET(STORM_INCLUDE_DIR "${stormlib_SOURCE_DIR}/includes")
   SET(STORM_LIBRARY_DEBUG_DIR "${stormlib_SOURCE_DIR}/lib/debug/x64")
   SET(STORM_LIBRARY_RELEASE_DIR "${stormlib_SOURCE_DIR}/lib/release/x64")
-endif()
+# endif()
 
 find_path (STORM_INCLUDE_DIR StormLib.h StormPort.h)
 

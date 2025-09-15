@@ -7,11 +7,14 @@ FetchContent_Declare (fastnoise2
         PATCH_COMMAND "${CMAKE_COMMAND}" -P "${CMAKE_SOURCE_DIR}/cmake/deps/patch_fastnoise2.cmake"
         UPDATE_DISCONNECTED true
         )
-FetchContent_GetProperties (fastnoise2)
-IF(NOT fastnoise2_POPULATED)
-  MESSAGE(STATUS "Installing FastNoise2...")
-  FetchContent_PopulateFast(fastnoise2)
-ENDIF()
+
+FetchContent_MakeAvailable(fastnoise2) # replaces FetchContent_PopulateFast
+
+# FetchContent_GetProperties (fastnoise2)
+# IF(NOT fastnoise2_POPULATED)
+#   MESSAGE(STATUS "Installing FastNoise2...")
+#   FetchContent_PopulateFast(fastnoise2)
+# ENDIF()
 
 SET(FASTNOISE2_NOISETOOL:BOOL OFF)
 SET(FASTNOISE2_TESTS:BOOL OFF)

@@ -7,11 +7,12 @@ FetchContent_Declare(
   GIT_TAG        dep-casclib
 )
 
-FetchContent_GetProperties(casclib)
-if(NOT casclib)
+FetchContent_MakeAvailable(casclib) # replaces FetchContent_PopulateFast
+# FetchContent_GetProperties(casclib)
+# if(NOT casclib)
   MESSAGE(STATUS "---------------------------------------------")
   MESSAGE(STATUS "Installing Casclib...")
-  FetchContent_PopulateFast(casclib)
+  # FetchContent_PopulateFast(casclib)
   SET(CASCLIB_INCLUDE_DIR "${casclib_SOURCE_DIR}/includes")
 
   if (UNIX)
@@ -31,7 +32,7 @@ if(NOT casclib)
     SET(CASCLIB_LIBRARY_DEBUG_DIR "${casclib_SOURCE_DIR}/lib/debug/x64")
     SET(CASCLIB_LIBRARY_RELEASE_DIR "${casclib_SOURCE_DIR}/lib/release/x64")
   endif()
-endif()
+# endif()
 
 find_path (CASCLIB_INCLUDE_DIR CascLib.h CascPort.h)
 
