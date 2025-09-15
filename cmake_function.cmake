@@ -9,20 +9,22 @@ FUNCTION(collect_files output base_dir do_recurse globbing_exprs exclude_dirs)
         LIST(TRANSFORM globbing_exprs PREPEND "${base_dir}/")
         FILE(${glob} files CONFIGURE_DEPENDS ${globbing_exprs})
 
-        FOREACH(file IN LISTS files)
-                SET(match FALSE)
-
-                FOREACH(dir IN LISTS exclude_dirs)
-                        IF("${file}" MATCHES "/${dir}/")
-                        SET(match TRUE)
-                        ENDIF()
-                ENDFOREACH()
-
-                IF(NOT ${match})
-                        LIST(APPEND result "${file}")
-                ENDIF()
-
-        ENDFOREACH()
+		FOREACH(file IN LISTS files)
+			SET(match FALSE)
+	
+			# Check if the file matches any excluded directory
+			FOREACH(dir IN LISTS exclude_dirs)
+				IF("${file}" MATCHES "/${dir}(/|$)")
+					SET(match TRUE)
+					# message(STATUS "Excluding file: ${file} (matches excluded directory: ${dir})")
+				ENDIF()
+			ENDFOREACH()
+	
+			# Only add the file to result if it does not match any excluded directory
+			IF(NOT ${match})
+				LIST(APPEND result "${file}")
+			ENDIF()
+		ENDFOREACH()
         SET(${output} "${result}" PARENT_SCOPE)
 ENDFUNCTION()
 

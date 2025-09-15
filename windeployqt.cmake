@@ -1,8 +1,8 @@
-find_package(Qt5Core REQUIRED)
+find_package(Qt6Core REQUIRED)
 
 # get absolute path to qmake, then use it to find windeployqt executable
 
-get_target_property(_qmake_executable Qt5::qmake IMPORTED_LOCATION)
+get_target_property(_qmake_executable Qt6::qmake IMPORTED_LOCATION)
 get_filename_component(_qt_bin_dir "${_qmake_executable}" DIRECTORY)
 
 function(windeployqt target)
@@ -16,21 +16,25 @@ function(windeployqt target)
     # - we run windeployqt on target and deploy Qt libs
 
     # debug configuration
-    if (CMAKE_BUILD_TYPE STREQUAL "Debug" OR NOT DEFINED CMAKE_BUILD_TYPE)
+    if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+		# OR NOT DEFINED CMAKE_BUILD_TYPE)
         add_custom_command(TARGET ${target} POST_BUILD
                 COMMAND "${_qt_bin_dir}/windeployqt.exe"
+				# COMMAND "${_qt_bin_dir}/windeployqt6.exe"
                 --verbose 1
                 --debug
                 --no-svg
-                --no-angle
                 --no-opengl-sw
                 --compiler-runtime
                 --no-system-d3d-compiler
                 --no-quick-import
                 --no-translations
-                --no-virtualkeyboard
-                --no-webkit2
-                --no-qmltooling
+				--pdb
+				# commands removed in QT 6 :
+                # --no-virtualkeyboard
+				# --no-angle
+                # --no-webkit2
+                # --no-qmltooling
                 \"$<TARGET_FILE:${target}>\"
                 COMMENT "Deploying Qt libraries using windeployqt for compilation target '${target}' ..."
                 )
@@ -45,18 +49,20 @@ function(windeployqt target)
 
         add_custom_command(TARGET ${target} POST_BUILD
                 COMMAND "${_qt_bin_dir}/windeployqt.exe"
+				# COMMAND "${_qt_bin_dir}/windeployqt6.exe"
                 --verbose 1
                 --release
                 --no-svg
-                --no-angle
                 --no-opengl-sw
                 --compiler-runtime
                 --no-system-d3d-compiler
                 --no-quick-import
                 --no-translations
-                --no-virtualkeyboard
-                --no-webkit2
-                --no-qmltooling
+				# commands removed in QT 6 :
+                # --no-virtualkeyboard
+				# --no-angle
+                # --no-webkit2
+                # --no-qmltooling
                 \"$<TARGET_FILE:${target}>\"
                 COMMENT "Deploying Qt libraries using windeployqt for compilation target '${target}' ..."
                 )
